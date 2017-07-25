@@ -33,6 +33,8 @@ initialize: bootstrap
 deps: 
 	rm -rf vendor
 	@glide up
+	grep -lr "github.com/Sirupsen/logrus" vendor | grep -E '.*\.go' | while read x; do \
+		gofmt -w -r '"github.com/Sirupsen/logrus" -> "github.com/sirupsen/logrus"' $$x; done;
 
 clean: 
 	rm -rf pkg
